@@ -14,17 +14,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 html {
     scroll-behavior: smooth;
 }
 body {
-    background-color: #4d403e;
+    background-color: #251f1e;
     color: var(--text);
     font-family: 'Inter', sans-serif;
     line-height: 1.4;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    transition: background-color 1s ease;
 }
 
 
@@ -47,6 +49,14 @@ body {
 /* ============================================================
    HERO SECTION (INICIO CON FONDO)
    ============================================================ */
+/* ============================================================
+   SOLUCIÓN: ELIMINAR LA LÍNEA DE CORTE DE LA IMAGEN
+   ============================================================ */
+
+/* ============================================================
+   SOLUCIÓN INFALIBLE: DOBLE GRADIENTE PARA ELIMINAR LA LÍNEA
+   ============================================================ */
+
 .hero-section {
     height: 100vh;
     display: flex;
@@ -55,23 +65,77 @@ body {
     padding: 0 5%;
     position: relative;
     overflow: hidden;
-    /* Cambia 'tu-foto.jpg' por la ruta de tu imagen de fondo */
-    background: linear-gradient(135deg, rgba(10,10,10,0.95) 20%, rgba(74,4,4,0.4) 100%), 
-                url('./IMG/backgr.png') no-repeat center center/cover;
+
+    /* --- EL CAMBIO CLAVE: MÚLTIPLES FONDOS --- */
+    background: 
+        /* 1. Gradiente de DESVANECIMIENTO (to bottom) - El que difumina la línea */
+        linear-gradient(to bottom, transparent 60%, var(--bg) 95%),
+        
+        /* 2. Tu Gradiente de ESTILO (135deg) - El que le da el tono bordeaux */
+        linear-gradient(135deg, rgba(10,10,10,0.95) 20%, rgba(74,4,4,0.3) 100%),
+        
+        /* 3. Tu IMAGEN DE FONDO */
+        url('./IMG/backgr.webp') no-repeat center center/cover;
+    
+    /* Aseguramos que el fondo no se repita y cubra todo */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    /* Tu animación de zoom sutil */
     animation: slowZoom 2s ease-out forwards;
 }
 
+/* El "Fundido" (Efecto Niebla) */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* Un pequeño truco de 2px para que el gradiente baje un poco más que la imagen */
+    left: 0;
+    width: 100%;
+    
+    /* ESTE ES EL CAMBIO CLAVE: Aumentamos mucho la altura del gradiente */
+    /* De 120px a 250px para que el desvanecimiento cubra la línea */
+    height: 250px; 
+    
+    /* Este degradado se asegura de que el final de tu foto se funde con el negro puro */
+    background: linear-gradient(to bottom, transparent 0%, var(--bg) 95%);
+    pointer-events: none;
+    z-index: 10; /* Aseguramos que esté sobre la imagen */
+}
+
+/* ============================================================
+   AJUSTE DE JERARQUÍA: NOMBRE VS PORTFOLIO
+   ============================================================ */
+
+/* El contenedor del nombre */
 .main-title {
-    font-size: clamp(1.5rem, 10vw, 7rem);
+    font-size: clamp(3.5rem, 10vw, 7rem); /* Ariana Alegre sigue grande */
     font-weight: 900;
     line-height: 0.85;
     letter-spacing: -4px;
-    animation: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column; /* Para poner el portfolio arriba o abajo */
 }
 
+/* El texto "Portfolio" o el detalle secundario */
+.main-title span.portfolio-label {
+    font-size: clamp(0.7rem, 2vw, 1rem); /* Mucho más chiquito */
+    font-weight: 400;
+    letter-spacing: 5px; /* Mucho espacio entre letras para estilo premium */
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px; /* Espacio con el nombre */
+    display: block;
+    -webkit-text-stroke: 0; /* Aseguramos que no tenga el borde del nombre */
+}
+
+/* Si usas la clase 'highlight' para tu nombre o apellido */
 .highlight {
     color: var(--accent);
-    -webkit-text-stroke: 3px var(--accent);
+    /* El borde transparente con stroke queda muy pro en tamaños grandes */
+    -webkit-text-stroke: 1px var(--accent); 
 }
 
 .hero-details {
@@ -87,37 +151,103 @@ body {
 /* ============================================================
    VIDEO & PRESENTACIÓN
    ============================================================ */
+/* ============================================================
+   AJUSTE DE ESPACIADO DEL VIDEO (RESPIRACIÓN VISUAL)
+   ============================================================ */
+
 .section-presentation {
-    margin-top: 40px; /* Cambiado de -80px a 40px positivo */
-    z-index: 10;
+    
+    /* Mantenemos la separación estética que pediste */
+    padding: 180px 5%; 
+    
+    /* Aseguramos que el color de fondo sea el mismo que el final de la máscara */
+    background-color: var(--bg); /* O negro #0a0a0a */
+    
     position: relative;
-    padding: 0 5%;
+    z-index: 1;
+
+    /* Aumentamos el margen arriba y abajo significativamente */
+    padding: 180px 5%; 
+    
+    /* Fondo con un degradado sutil para que la transición no sea brusca */
+    background: linear-gradient(to bottom, var(--bg) 0%, #0c0c0c 50%, var(--bg) 100%);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Aseguramos que no se pise con nada */
+    position: relative;
+    z-index: 5;
 }
 
+/* ============================================================
+   VIDEO IMPACTANTE (FORMATO GRANDE)
+   ============================================================ */
+
+/* ============================================================
+   VIDEO ULTRA-SEPARADO (ESPACIADO DE GALERÍA)
+   ============================================================ */
+
+.section-presentation {
+    /* Aumentamos a 250px para una separación radical arriba y abajo */
+    padding: 250px 5%; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    /* Fondo con degradado muy suave para marcar la zona del video */
+    background: radial-gradient(circle at center, #111 0%, var(--bg) 70%);
+    
+    position: relative;
+    z-index: 10;
+}
 
 .video-container {
-   
-    width: 90%; /* O el % que prefieras */
-    max-width: 800px;
-    margin: 0 auto 60px auto; /* El 60px abajo da aire a la siguiente sección */
-    display: block;
+    /* Margen de seguridad extra */
+    margin: 60px auto; 
+    
+    width: 100%;
+    max-width: 1100px; /* Mantenemos el tamaño grande imponente */
+    aspect-ratio: 16/9;
+    
+    border-radius: 20px; /* Bordes más curvos para suavizar la transición */
+    overflow: hidden;
+    
+    /* Borde sutil y sombra de gran escala */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 100px 180px -40px rgba(0, 0, 0, 1);
+    
+    /* Mantenemos la animación de revelado */
+    animation: sectionReveal both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 40%;
 }
 
-
+/* Ajuste de la sección de abajo (Sobre Mí / Skills) */
+.profile-grid {
+    /* Empujamos la siguiente sección aún más abajo */
+    margin-top: 150px; 
+    padding-top: 100px;
+    border-top: 1px solid var(--border);
+}
+/* Efecto Hover para video grande */
 .video-container:hover {
-    transform: scale(1.02);
+    transform: scale(1.02); /* Un zoom muy leve que llena más la pantalla */
+    border-color: var(--accent);
 }
 
 .main-video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6);
-    transition: filter 0.5s ease;
+    object-fit: cover; /* Asegura que llene todo el contenedor sin deformarse */
 }
 
 .video-container:hover .main-video {
-    filter: brightness(0.9);
+    filter: brightness(1) contrast(1);
 }
 
 .video-overlay-text {
@@ -323,4 +453,16 @@ body {
 @keyframes slowZoom {
     from { transform: scale(1.1); }
     to { transform: scale(1); }
+}
+@keyframes sectionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
 }
