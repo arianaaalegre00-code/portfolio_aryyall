@@ -1,0 +1,326 @@
+/* ============================================================
+   VARIABLES Y RESET
+   ============================================================ */
+:root {
+    --bg: #512a2a;           /* Negro profundo */
+    --text: #ffffff;         /* Blanco puro */
+    --accent: #c97064;       /* Bordó para detalles */
+    --grey: #202020;         /* Gris para bloques */
+    --muted: #888888;        /* Gris para textos secundarios */
+    --border: #333333;       /* Color de bordes */
+    --glass: rgba(255, 255, 255, 0.03);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    background-color: #4d403e;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    margin-left: 30px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+/* ============================================================
+   HERO SECTION (INICIO CON FONDO)
+   ============================================================ */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%;
+    position: relative;
+    overflow: hidden;
+    /* Cambia 'tu-foto.jpg' por la ruta de tu imagen de fondo */
+    background: linear-gradient(135deg, rgba(10,10,10,0.95) 20%, rgba(74,4,4,0.4) 100%), 
+                url('./IMG/backgr.png') no-repeat center center/cover;
+    animation: slowZoom 2s ease-out forwards;
+}
+
+.main-title {
+    font-size: clamp(1.5rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -4px;
+    animation: reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.highlight {
+    color: var(--accent);
+    -webkit-text-stroke: 3px var(--accent);
+}
+
+.hero-details {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    max-width: 600px;
+    font-weight: 400;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* ============================================================
+   VIDEO & PRESENTACIÓN
+   ============================================================ */
+.section-presentation {
+    margin-top: 40px; /* Cambiado de -80px a 40px positivo */
+    z-index: 10;
+    position: relative;
+    padding: 0 5%;
+}
+
+
+.video-container {
+   
+    width: 90%; /* O el % que prefieras */
+    max-width: 800px;
+    margin: 0 auto 60px auto; /* El 60px abajo da aire a la siguiente sección */
+    display: block;
+}
+
+
+.video-container:hover {
+    transform: scale(1.02);
+}
+
+.main-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+    transition: filter 0.5s ease;
+}
+
+.video-container:hover .main-video {
+    filter: brightness(0.9);
+}
+
+.video-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    padding: 15px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    transition: all 0.4s ease;
+}
+
+/* ============================================================
+   TRABAJOS (GRID ASIMÉTRICO)
+   ============================================================ */
+.work-section {
+    padding: 150px 5%;
+    background-color: #050505;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+}
+
+.work-card {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+.work-card.large { grid-column: span 2; }
+
+.work-card:hover {
+    transform: translateY(-20px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.work-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+
+.section-label {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    display: block;
+}
+
+.work-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+}
+
+.work-img {
+    background: var(--grey);
+    width: 100%;
+    aspect-ratio: 4/5;
+    transition: 0.5s ease;
+}
+
+.work-item:hover .work-img {
+    filter: brightness(1.2);
+}
+
+.work-info h3 {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.work-info p {
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+/* Perfil & Skills */
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    border-top: 1px solid var(--border);
+    margin-top: 100px; /* Esto empuja la sección hacia abajo para que no se pise */
+    padding-top: 60px;
+}
+
+.bio {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    line-height: 1.2;
+}
+.tamaño {    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    display: block;}
+    
+.skills-list {
+    list-style: none;
+}
+
+.skills-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.cv-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+    font-weight: 700;
+}
+
+.work-card.large .work-image { height: 550px; }
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(0.6);
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.work-card:hover .project-img {
+    filter: grayscale(0%) brightness(1);
+    transform: scale(1.08);
+}
+
+.work-content { padding: 40px; }
+
+.work-content h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+/* ============================================================
+   FOOTER & CONTACTO
+   ============================================================ */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 100px 5%;
+    border-top: 1px solid var(--border);
+}
+
+.contact-methods a {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    transition: all 0.4s ease;
+}
+
+.contact-methods a:hover {
+    color: var(--accent);
+    padding-left: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .work-grid, .footer-grid { grid-template-columns: 1fr; }
+    .work-card.large { grid-column: span 1; }
+    .main-title { font-size: 4rem; }
+}
+/* ============================================================
+   ANIMACIONES (KEYFRAMES)
+   ============================================================ */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes reveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes slowZoom {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+}
